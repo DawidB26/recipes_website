@@ -1,0 +1,172 @@
+/* Resetowanie domyślnych stylów */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Styl dla całego ciała strony */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f9;
+    color: #333;
+}
+
+/* Nagłówek */
+header {
+    background-color: #ff6f61;
+    color: white;
+    padding: 20px 0;
+    text-align: center;
+}
+
+header h1 {
+    font-size: 2.5em;
+    margin-bottom: 10px;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+}
+
+nav ul li {
+    display: inline-block;
+    margin: 0 15px;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 1.2em;
+}
+
+nav ul li a:hover {
+    text-decoration: underline;
+}
+
+/* Sekcja główna z przepisami i reklamami */
+#content {
+    display: flex;
+    justify-content: space-between;
+    margin: 20px;
+    position: relative;
+/*    background-image: url("img/images.jpg"); */
+    background-size: cover;
+    background-position: center;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+/* Reklama po lewej i prawej stronie */
+.ad {
+    background-color: #e2e2e2;
+    padding: 20px;
+    width: 200px;
+    height: 100%;
+    text-align: center;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    margin: 0 10px;
+}
+
+/* Sekcja przepisów */
+#recipes {
+    flex: 1;
+    padding: 40px 20px;
+    text-align: center;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Okno logowania */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.4);
+    padding-top: 60px;
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 5% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 400px;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* Styl dla przycisków logowania */
+button {
+    background-color: #ff6f61;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    margin: 10px 0;
+    font-size: 1.2em;
+    cursor: pointer;
+    width: 100%;
+    border-radius: 5px;
+}
+
+button:hover {
+    background-color: #e64a44;
+}
+
+button:focus {
+    outline: none;
+}
+
+/* Responsywność */
+@media screen and (max-width: 768px) {
+    header h1 {
+        font-size: 2em;
+    }
+
+    nav ul li {
+        margin: 0 10px;
+    }
+
+    nav ul li a {
+        font-size: 1.1em;
+    }
+
+    #content {
+        flex-direction: column;
+        align-items: center;
+        background-image: none; /* Wersja mobilna bez tła */
+    }
+
+    .ad {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+
+    #recipes {
+        margin: 20px 0;
+    }
+}
