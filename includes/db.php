@@ -1,6 +1,6 @@
 <?php
 $host = 'localhost';
-$dbname = 'strona z przepisami';
+$dbname = 'strona_z_przepisami';
 $user = 'root';
 $password = '';
 

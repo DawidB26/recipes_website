@@ -2,7 +2,7 @@
     <div class="modal-content">
         <span class="close">&times;</span>
         <h2>Zarejestruj się</h2><br/><br/>
-            <form id="register-form" method="post" action="/public/register.php">
+            <form id="register-form" method="post" action="public/register.php">
                 <label for="username">Nazwa użytkownika:</label>
                 <input type="text" id="username" name="username" required><br/><br/>
                 

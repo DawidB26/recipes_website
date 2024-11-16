@@ -1,6 +1,16 @@
 <?php
+<<<<<<< HEAD
 echo realpath('../includes/db.php');
 require_once(__DIR__ . '/../includes/db.php');
+=======
+require_once 'includes/db.php';
+
+session_start();
+if (!isset($_SESSION['user_id'])) {
+    header('Location: login.php');
+    exit;
+}
+>>>>>>> 2c4005b21d342aa461ad4f1fb1d4c6288ab5b638
 
 if (isset($_GET['recipe_id'])) {
     $recipe_id = $_GET['recipe_id'];
