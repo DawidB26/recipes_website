@@ -20,7 +20,7 @@
 
         <!-- Przepisy będą generowane dynamicznie przez JavaScript -->
 		<div class="recipes">
-            <?php include 'public/get_recipes.php'; ?>
+            <?php require_once "public/get_recipe.php"; ?>
         </div>        
 
         <!-- Reklama po prawej stronie -->
