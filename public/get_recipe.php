@@ -1,11 +1,5 @@
 <?php
-require_once '../includes/db.php';
-
-session_start();
-if (!isset($_SESSION['user_id'])) {
-    header('Location: login.php');
-    exit;
-}
+require_once(__DIR__ . '/../includes/db.php');
 
 if (isset($_GET['recipe_id'])) {
     $recipe_id = $_GET['recipe_id'];

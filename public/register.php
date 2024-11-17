@@ -1,6 +1,6 @@
 <?php
 // register.php
-require_once 'includes/db.php';
+require_once(__DIR__ . '/../includes/db.php');
 session_start();
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
