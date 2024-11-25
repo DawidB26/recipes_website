@@ -8,9 +8,8 @@
 </head>
 <body>
     <!-- Nagłówek -->
-    <?php require_once "blocks/header.php"; ?>
-
-    <?php
+    <?php require_once "blocks/header.php";
+    session_start();
     // Ustawienia ciasteczka
     $cookieName = "visit_counter"; // Nazwa ciasteczka
     $cookieExpire = time() + (30 * 24 * 60 * 60); // Czas wygaśnięcia: 30 dni
@@ -42,10 +41,8 @@
 				<p>Reklama 1</p>
 			</div>
 	
-
-        <!-- Przepisy będą generowane dynamicznie przez JavaScript -->
 		<div class="recipes">
-            <?php require_once "public/get_recipe.php"; ?>
+            <?php require_once "public/popular_recipe.php"; ?>
         </div>        
 
         <!-- Reklama po prawej stronie -->

@@ -1,6 +1,12 @@
 <?php
 require_once '../includes/db.php';
+session_start();
 
+// Sprawdzenie, czy użytkownik jest zalogowany
+if (!isset($_SESSION['user_id'])) {
+    header("Location: login.php"); // Przekierowanie na stronę logowania
+    exit();
+}
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $recipe_id = $_POST['recipe_id'];
     $user_id = $_POST['user_id'];

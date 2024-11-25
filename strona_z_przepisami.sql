@@ -28,7 +28,7 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `categories` (
-  `category_id` int(11) NOT NULL,
+  `categories_id` int(11) NOT NULL,
   `name` varchar(50) NOT NULL,
   `description` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -37,7 +37,7 @@ CREATE TABLE `categories` (
 -- Dumping data for table `categories`
 --
 
-INSERT INTO `categories` (`category_id`, `name`, `description`) VALUES
+INSERT INTO `categories` (`categories_id`, `name`, `description`) VALUES
 (1, 'Desery', 'Słodka potrawa podawana jako osobne słodkie danie na koniec posiłku (obiadu, kolacji lub przyjęcia), ale także na podwieczorek albo podczas niezobowiązującego spotkania o dowolnej porze dnia.'),
 (2, 'at', ''),
 (3, 'nulla', 'Nam ultrices, libero non mattis pulvinar, nulla pede ullamcorper augue, a suscipit nulla elit ac nulla. Sed vel enim sit amet nunc viverra dapibus.'),
@@ -951,7 +951,7 @@ CREATE TABLE `recent_recipes` (
 `recipe_id` int(11)
 ,`title` varchar(100)
 ,`user_id` int(11)
-,`category` varchar(50)
+,`categories` varchar(50)
 ,`tags` mediumtext
 );
 
@@ -1492,14 +1492,14 @@ INSERT INTO `recipes` (`recipe_id`, `title`, `description`, `instructions`, `ser
 
 CREATE TABLE `recipe_categories` (
   `recipe_id` int(11) NOT NULL,
-  `category_id` int(11) NOT NULL
+  `categories_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `recipe_categories`
 --
 
-INSERT INTO `recipe_categories` (`recipe_id`, `category_id`) VALUES
+INSERT INTO `recipe_categories` (`recipe_id`, `categories_id`) VALUES
 (1, 1),
 (1, 105),
 (1, 125),
@@ -3152,7 +3152,7 @@ CREATE TABLE `user_recipe_summary` (
 --
 DROP TABLE IF EXISTS `detailed_recipe_info`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `detailed_recipe_info`  AS SELECT `r`.`recipe_id` AS `recipe_id`, `r`.`title` AS `recipe_title`, `r`.`description` AS `description`, `r`.`instructions` AS `instructions`, `u`.`username` AS `author`, `ing`.`ingredients` AS `ingredients`, `ing`.`ingredient_count` AS `ingredient_count`, group_concat(distinct `c`.`name` separator ', ') AS `categories`, group_concat(distinct `t`.`name` separator ', ') AS `tags` FROM ((((((`recipes` `r` join `users` `u` on(`r`.`user_id` = `u`.`user_id`)) left join (select `ri`.`recipe_id` AS `recipe_id`,group_concat(concat(`i`.`name`,' (',`ri`.`quantity`,' ',`ri`.`unit`,')') separator ', ') AS `ingredients`,count(`ri`.`ingredient_id`) AS `ingredient_count` from (`recipe_ingredients` `ri` join `ingredients` `i` on(`ri`.`ingredient_id` = `i`.`ingredient_id`)) group by `ri`.`recipe_id`) `ing` on(`r`.`recipe_id` = `ing`.`recipe_id`)) left join `recipe_categories` `rc` on(`r`.`recipe_id` = `rc`.`recipe_id`)) left join `categories` `c` on(`rc`.`category_id` = `c`.`category_id`)) left join `recipe_tags` `rt` on(`r`.`recipe_id` = `rt`.`recipe_id`)) left join `tags` `t` on(`rt`.`tag_id` = `t`.`tag_id`)) GROUP BY `r`.`recipe_id` ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `detailed_recipe_info`  AS SELECT `r`.`recipe_id` AS `recipe_id`, `r`.`title` AS `recipe_title`, `r`.`description` AS `description`, `r`.`instructions` AS `instructions`, `u`.`username` AS `author`, `ing`.`ingredients` AS `ingredients`, `ing`.`ingredient_count` AS `ingredient_count`, group_concat(distinct `c`.`name` separator ', ') AS `categories`, group_concat(distinct `t`.`name` separator ', ') AS `tags` FROM ((((((`recipes` `r` join `users` `u` on(`r`.`user_id` = `u`.`user_id`)) left join (select `ri`.`recipe_id` AS `recipe_id`,group_concat(concat(`i`.`name`,' (',`ri`.`quantity`,' ',`ri`.`unit`,')') separator ', ') AS `ingredients`,count(`ri`.`ingredient_id`) AS `ingredient_count` from (`recipe_ingredients` `ri` join `ingredients` `i` on(`ri`.`ingredient_id` = `i`.`ingredient_id`)) group by `ri`.`recipe_id`) `ing` on(`r`.`recipe_id` = `ing`.`recipe_id`)) left join `recipe_categories` `rc` on(`r`.`recipe_id` = `rc`.`recipe_id`)) left join `categories` `c` on(`rc`.`categories_id` = `c`.`categories_id`)) left join `recipe_tags` `rt` on(`r`.`recipe_id` = `rt`.`recipe_id`)) left join `tags` `t` on(`rt`.`tag_id` = `t`.`tag_id`)) GROUP BY `r`.`recipe_id` ;
 
 -- --------------------------------------------------------
 
@@ -3170,7 +3170,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `recent_recipes`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `recent_recipes`  AS SELECT `r`.`recipe_id` AS `recipe_id`, `r`.`title` AS `title`, `r`.`user_id` AS `user_id`, `c`.`name` AS `category`, group_concat(`t`.`name` separator ', ') AS `tags` FROM ((((`recipes` `r` join `recipe_categories` `rc` on(`r`.`recipe_id` = `rc`.`recipe_id`)) join `categories` `c` on(`rc`.`category_id` = `c`.`category_id`)) join `recipe_tags` `rt` on(`r`.`recipe_id` = `rt`.`recipe_id`)) join `tags` `t` on(`rt`.`tag_id` = `t`.`tag_id`)) GROUP BY `r`.`recipe_id`, `r`.`title`, `r`.`user_id`, `c`.`name` ORDER BY `r`.`created_at` DESC ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `recent_recipes`  AS SELECT `r`.`recipe_id` AS `recipe_id`, `r`.`title` AS `title`, `r`.`user_id` AS `user_id`, `c`.`name` AS `categories`, group_concat(`t`.`name` separator ', ') AS `tags` FROM ((((`recipes` `r` join `recipe_categories` `rc` on(`r`.`recipe_id` = `rc`.`recipe_id`)) join `categories` `c` on(`rc`.`categories_id` = `c`.`categories_id`)) join `recipe_tags` `rt` on(`r`.`recipe_id` = `rt`.`recipe_id`)) join `tags` `t` on(`rt`.`tag_id` = `t`.`tag_id`)) GROUP BY `r`.`recipe_id`, `r`.`title`, `r`.`user_id`, `c`.`name` ORDER BY `r`.`created_at` DESC ;
 
 -- --------------------------------------------------------
 
@@ -3179,7 +3179,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `recipe_overview`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `recipe_overview`  AS SELECT `r`.`recipe_id` AS `recipe_id`, `r`.`title` AS `recipe_title`, `r`.`description` AS `description`, `u`.`username` AS `author`, group_concat(distinct `c`.`name` separator ', ') AS `categories`, group_concat(distinct `t`.`name` separator ', ') AS `tags` FROM (((((`recipes` `r` join `users` `u` on(`r`.`user_id` = `u`.`user_id`)) left join `recipe_categories` `rc` on(`r`.`recipe_id` = `rc`.`recipe_id`)) left join `categories` `c` on(`rc`.`category_id` = `c`.`category_id`)) left join `recipe_tags` `rt` on(`r`.`recipe_id` = `rt`.`recipe_id`)) left join `tags` `t` on(`rt`.`tag_id` = `t`.`tag_id`)) GROUP BY `r`.`recipe_id` ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `recipe_overview`  AS SELECT `r`.`recipe_id` AS `recipe_id`, `r`.`title` AS `recipe_title`, `r`.`description` AS `description`, `u`.`username` AS `author`, group_concat(distinct `c`.`name` separator ', ') AS `categories`, group_concat(distinct `t`.`name` separator ', ') AS `tags` FROM (((((`recipes` `r` join `users` `u` on(`r`.`user_id` = `u`.`user_id`)) left join `recipe_categories` `rc` on(`r`.`recipe_id` = `rc`.`recipe_id`)) left join `categories` `c` on(`rc`.`categories_id` = `c`.`categories_id`)) left join `recipe_tags` `rt` on(`r`.`recipe_id` = `rt`.`recipe_id`)) left join `tags` `t` on(`rt`.`tag_id` = `t`.`tag_id`)) GROUP BY `r`.`recipe_id` ;
 
 -- --------------------------------------------------------
 
@@ -3207,7 +3207,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 -- Indeksy dla tabeli `categories`
 --
 ALTER TABLE `categories`
-  ADD PRIMARY KEY (`category_id`);
+  ADD PRIMARY KEY (`categories_id`);
 
 --
 -- Indeksy dla tabeli `comments`
@@ -3242,8 +3242,8 @@ ALTER TABLE `recipes`
 -- Indeksy dla tabeli `recipe_categories`
 --
 ALTER TABLE `recipe_categories`
-  ADD PRIMARY KEY (`recipe_id`,`category_id`),
-  ADD KEY `category_id` (`category_id`);
+  ADD PRIMARY KEY (`recipe_id`,`categories_id`),
+  ADD KEY `categories_id` (`categories_id`);
 
 --
 -- Indeksy dla tabeli `recipe_ingredients`
@@ -3281,7 +3281,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=202;
+  MODIFY `categories_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=202;
 
 --
 -- AUTO_INCREMENT for table `comments`
@@ -3348,7 +3348,7 @@ ALTER TABLE `recipes`
 --
 ALTER TABLE `recipe_categories`
   ADD CONSTRAINT `recipe_categories_ibfk_1` FOREIGN KEY (`recipe_id`) REFERENCES `recipes` (`recipe_id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `recipe_categories_ibfk_2` FOREIGN KEY (`category_id`) REFERENCES `categories` (`category_id`) ON DELETE CASCADE;
+  ADD CONSTRAINT `recipe_categories_ibfk_2` FOREIGN KEY (`categories_id`) REFERENCES `categories` (`categories_id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `recipe_ingredients`

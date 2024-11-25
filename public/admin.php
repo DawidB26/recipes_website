@@ -1,6 +1,6 @@
 <?php
 require_once '../includes/db.php'; // Połączenie z bazą danych
-
+session_start();
 try {
     // Pobieranie listy tabel i widoków
     $tables = $pdo->query("SHOW FULL TABLES WHERE Table_type = 'BASE TABLE' OR Table_type = 'VIEW'")->fetchAll(PDO::FETCH_ASSOC);

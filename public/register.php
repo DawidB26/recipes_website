@@ -1,7 +1,6 @@
 <?php
 // register.php
-require_once(__DIR__ . '/../includes/db.php');
-session_start();
+require_once(__DIR__ . '/../includes/db.php');a
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $username = $_POST['username'];
