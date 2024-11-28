@@ -1,4 +1,13 @@
-<?php
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Najpyszniejsze Przepisy</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <?php
 require_once "includes/db.php";
 require_once "blocks/header.php";
 
@@ -12,9 +21,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 
     // Podstawowe zapytanie SQL
     $sql = "SELECT r.* 
-            FROM recipe_overview r
-            LEFT JOIN recipe_categories rc ON r.recipe_id = rc.recipe_id
-            LEFT JOIN categories c ON rc.category_id = c.category_id
+            FROM recipe_overview_r
+            LEFT JOIN recipe_categories_rc ON r.recipe_id = rc.recipe_id
+            LEFT JOIN categories_c ON rc.category_id = c.category_id
             WHERE 1=1";
 
     $params = [];
@@ -39,17 +48,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     $recipes = $stmt->fetchAll();
 }
 ?>
-
-<!DOCTYPE html>
-<html lang="pl">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wyszukiwarka Przepisów</title>
-    <link rel="stylesheet" href="css/style.css">
-</head>
-<body>
-    <h1>Wyszukiwarka Przepisów</h1>
+    <section id="content">
+			<!-- Reklama po lewej stronie -->
+			<div id="left-ad" class="ad">
+				<p>Reklama 1</p>
+			</div>
+	
+		<div class="recipes">
+        <h1>Wyszukiwarka Przepisów</h1>
     <form method="GET" action="search.php">
         <input type="text" name="keyword" placeholder="Słowo kluczowe" value="<?= htmlspecialchars($keyword ?? '') ?>">
         <select name="category">
@@ -76,6 +82,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
         <?php else: ?>
             <p>Nie znaleziono przepisów.</p>
         <?php endif; ?>
-    </div>
+        </div>        
+
+        <!-- Reklama po prawej stronie -->
+        <div id="right-ad" class="ad">
+            <p>Reklama 2</p>
+        </div>
+    </section>
+    <?php require_once "blocks/login-modal.php"; ?>
+    <?php require_once "blocks/register-modal.php"; ?>
+
+    <script src="js/main.js"></script>
+    <script src="js/auth.js"></script>
 </body>
 </html>

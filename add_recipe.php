@@ -5,7 +5,7 @@ session_start();
 
 // Sprawdzenie, czy użytkownik jest zalogowany
 if (!isset($_SESSION['user_id'])) {
-    header("Location: login.php"); // Przekierowanie na stronę logowania
+    header("Location: http://localhost/dashboard/strona_z_przepisami/not-login.php"); // Przekierowanie na stronę logowania
     exit();
 }
 
@@ -76,28 +76,28 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <body>
     <?php require_once "blocks/header.php"; ?>
 
-    <h1>Dodaj nowy przepis</h1>
+    <h1>Dodaj nowy przepis</h1><br/><br/>
 
     <form method="POST" action="add_recipe.php">
-        <label for="title">Nazwa przepisu:</label>
-        <input type="text" id="title" name="title" required>
+        <label for="title">Nazwa przepisu:</label><br/>
+        <input type="text" id="title" name="title" required><br/><br/>
 
-        <label for="description">Opis:</label>
-        <textarea id="description" name="description" required></textarea>
+        <label for="description">Opis:</label><br/>
+        <textarea id="description" name="description" required></textarea><br/><br/>
 
-        <label for="instructions">Instrukcje przygotowania:</label>
-        <textarea id="instructions" name="instructions" required></textarea>
+        <label for="instructions">Instrukcje przygotowania:</label><br/>
+        <textarea id="instructions" name="instructions" required></textarea><br/><br/>
 
-        <label for="prep_time">Czas przygotowania (minuty):</label>
-        <input type="number" id="prep_time" name="prep_time" required>
+        <label for="prep_time">Czas przygotowania (minuty):</label><br/>
+        <input type="number" id="prep_time" name="prep_time" required><br/><br/>
 
-        <label for="cook_time">Czas gotowania (minuty):</label>
-        <input type="number" id="cook_time" name="cook_time" required>
+        <label for="cook_time">Czas gotowania (minuty):</label><br/>
+        <input type="number" id="cook_time" name="cook_time" required><br/><br/>
 
-        <label for="servings">Liczba porcji:</label>
-        <input type="number" id="servings" name="servings" required>
+        <label for="servings">Liczba porcji:</label><br/>
+        <input type="number" id="servings" name="servings" required><br/><br/>
 
-        <label for="categories">Kategorie:</label>
+        <label for="categories">Kategorie:</label><br/>
         <select id="categories" name="categories[]" multiple>
             <?php
             // Pobranie dostępnych kategorii z bazy danych
@@ -106,7 +106,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 echo "<option value='{$category['category_id']}'>" . htmlspecialchars($category['name']) . "</option>";
             }
             ?>
-        </select>
+        </select><br/><br/>
 
         <label for="ingredients">Składniki:</label>
         <div id="ingredients-container">
