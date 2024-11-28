@@ -25,7 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $_SESSION['username'] = $user['username'];
 
         // Przekierowanie użytkownika na stronę główną lub do strony, na którą próbował się dostać
-        header("Location: ../index.php"); // Można zmienić, jeśli chcesz inne przekierowanie
+        header("Location: http://localhost/dashboard/strona_z_przepisami/index.php"); // Można zmienić, jeśli chcesz inne przekierowanie
         exit();
     } else {
         // Jeśli dane logowania są niepoprawne

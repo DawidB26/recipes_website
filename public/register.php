@@ -1,8 +1,8 @@
 <?php
 // register.php
-require_once(__DIR__ . '/../includes/db.php');a
+require_once(__DIR__ . '/../includes/db.php');
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $username = $_POST['username'];
     $email = $_POST['email'];
     $password = password_hash($_POST['password'], PASSWORD_BCRYPT);
@@ -13,7 +13,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $_SESSION['user_id'] = $pdo->lastInsertId();
         $_SESSION['username'] = $username;
         echo json_encode(["status" => "success", "message" => "User registered successfully."]);
+        header("Location: http://localhost/dashboard/strona_z_przepisami/index.php");
     } catch (PDOException $e) {
         echo json_encode(["status" => "error", "message" => "Registration failed: " . $e->getMessage()]);
     }
 }
+?>

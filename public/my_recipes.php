@@ -3,7 +3,7 @@ require_once "../includes/db.php";
 session_start();
 
 if (!isset($_SESSION['user_id'])) {
-    header("Location: login.php");
+    header("Location: http://localhost/dashboard/strona_z_przepisami/not-login.php");
     exit();
 }
 echo "Witaj, " . htmlspecialchars($_SESSION['username']);
