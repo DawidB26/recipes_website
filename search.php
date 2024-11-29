@@ -49,10 +49,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 }
 ?>
     <section id="content">
-			<!-- Reklama po lewej stronie -->
-			<div id="left-ad" class="ad">
-				<p>Reklama 1</p>
-			</div>
 	
 		<div class="recipes">
         <h1>Wyszukiwarka Przepisów</h1>
@@ -83,11 +79,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
             <p>Nie znaleziono przepisów.</p>
         <?php endif; ?>
         </div>        
-
-        <!-- Reklama po prawej stronie -->
-        <div id="right-ad" class="ad">
-            <p>Reklama 2</p>
-        </div>
     </section>
     <?php require_once "blocks/login-modal.php"; ?>
     <?php require_once "blocks/register-modal.php"; ?>
