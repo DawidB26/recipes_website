@@ -5,7 +5,7 @@ session_start();
 
 // Sprawdzenie, czy użytkownik jest zalogowany
 if (!isset($_SESSION['user_id'])) {
-    header("Location: http://localhost/dashboard/strona_z_przepisami/not-login.php"); // Przekierowanie na stronę logowania
+    header("Location: http://localhost/strona_z_przepisami/not-login.php"); // Przekierowanie na stronę logowania
     exit();
 }
 

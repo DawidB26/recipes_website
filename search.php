@@ -21,9 +21,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 
     // Podstawowe zapytanie SQL
     $sql = "SELECT r.* 
-            FROM recipe_overview_r
-            LEFT JOIN recipe_categories_rc ON r.recipe_id = rc.recipe_id
-            LEFT JOIN categories_c ON rc.category_id = c.category_id
+            FROM recipe_overview r
+            LEFT JOIN recipe_categories rc ON r.recipe_id = rc.recipe_id
+            LEFT JOIN categories c ON rc.category_id = c.category_id
             WHERE 1=1";
 
     $params = [];

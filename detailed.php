@@ -50,9 +50,9 @@ if (isset($_GET['id'])) {
                 <p><strong>Kategorie:</strong> <?php echo htmlspecialchars($recipe['categories']); ?></p>
                 <p><strong>Tagi:</strong> <?php echo htmlspecialchars($recipe['tags']); ?></p>
                 <form method="POST" action="favorites.php">
-    <input type="hidden" name="recipe_id" value="<?= htmlspecialchars($recipe['recipe_id']) ?>">
-    <button type="submit">Dodaj do ulubionych</button>
-</form>
+                    <input type="hidden" name="recipe_id" value="<?= htmlspecialchars($recipe['recipe_id']) ?>">
+                    <button type="submit">Dodaj do ulubionych</button>
+                </form>
 
             </section>
         </html>

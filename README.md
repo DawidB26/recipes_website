@@ -6,7 +6,7 @@ Apache (wymagany do obsługi serwera WWW),
 MySQL (do obsługi bazy danych),
 Opcjonalnie inne komponenty, jak PHPMyAdmin.
 2. Przygotuj pliki projektu
-Spakuj pliki strony z githuba https://github.com/DawidB26/recipes_website/tree/main:
+Spakuj pliki strony z githuba https://github.com/DawidB26/strona_z_przepisami/tree/main:
 Upewnij się, że cała zawartość projektu (np. katalog recipes_website, folder includes, pliki PHP, CSS, JS) jest zebrana w jednym folderze.
 Przenieś pliki projektu do katalogu XAMPP:
 Skopiuj folder z plikami do katalogu C:\xampp\htdocs.
@@ -41,4 +41,4 @@ Zapisz zmiany.
 Otwórz przeglądarkę.
 Wejdź na lokalny adres strony:
 Jeśli folder projektu to recipes_website, wpisz:
-http://localhost/recipes_website
+http://localhost/strona_z_przepisami
