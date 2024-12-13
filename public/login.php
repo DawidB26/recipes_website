@@ -23,7 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Zapisanie danych użytkownika w sesji
         $_SESSION['user_id'] = $user['user_id'];
         $_SESSION['username'] = $user['username'];
-
+        $_SESSION['is_admin'] = $user['is_admin'];
         // Przekierowanie użytkownika na stronę główną lub do strony, na którą próbował się dostać
         header("Location: http://localhost/strona_z_przepisami/index.php"); // Można zmienić, jeśli chcesz inne przekierowanie
         exit();

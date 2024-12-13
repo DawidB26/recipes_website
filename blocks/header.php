@@ -10,6 +10,10 @@
                 <li><a href="#" id="login-btn">Zaloguj się</a></li>
                 <li><a href="#" id="register-btn">Zarejestruj się</a></li>
                 <li><a href="http://localhost/strona_z_przepisami/public/logout.php">Wyloguj</a></li>
+                <?php if (isset($_SESSION['is_admin']) && $_SESSION['is_admin'] == 1): ?>
+                <li><a href="http://localhost/strona_z_przepisami/public/admin_dashboard.php">Panel admina</a></li>
+                <?php endif; ?>
+
             </ul>
         </nav>
 </header>
